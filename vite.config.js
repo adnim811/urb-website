@@ -8,5 +8,13 @@ export default defineConfig({
     open: true, // 👈 this opens the browser when you run `npm run dev`
   },
   base: '/Aditya-Portfolio/',
+  build: {
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name][extname]'
+      }
+    }
+  }
 })
 

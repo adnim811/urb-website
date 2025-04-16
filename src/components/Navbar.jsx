@@ -96,6 +96,8 @@ function Navbar() {
     };
   }, []);
 
+  const currentPath = location.hash.slice(2) || ''; // Remove the '#/' and get the current path
+
   return (
     <>
       <motion.div
@@ -163,42 +165,45 @@ function Navbar() {
               padding: 0,
             }}
           >
-            {['About', 'Projects', 'Resume'].map((route) => (
-              <li key={route}>
-                <Link
-                  to={`/${route.toLowerCase()}`}
-                  style={{
-                    position: 'relative',
-                    fontWeight: 500,
-                    fontSize: '0.9rem',
-                    color: '#FFFFFF',
-                    textDecoration: 'none',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '100px',
-                    backgroundColor: location.pathname === `/${route.toLowerCase()}` 
-                      ? 'rgba(255, 255, 255, 0.2)' 
-                      : 'transparent',
-                    transition: 'all 0.2s ease',
-                    display: 'block',
-                    opacity: location.pathname === `/${route.toLowerCase()}` ? 1 : 0.8,
-                  }}
-                  onMouseEnter={(e) => {
-                    if (location.pathname !== `/${route.toLowerCase()}`) {
-                      e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                      e.target.style.opacity = '1';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (location.pathname !== `/${route.toLowerCase()}`) {
-                      e.target.style.backgroundColor = 'transparent';
-                      e.target.style.opacity = '0.8';
-                    }
-                  }}
-                >
-                  {route}
-                </Link>
-              </li>
-            ))}
+            {['About', 'Projects', 'Resume'].map((route) => {
+              const routePath = route.toLowerCase();
+              return (
+                <li key={route}>
+                  <Link
+                    to={`/${routePath}`}
+                    style={{
+                      position: 'relative',
+                      fontWeight: 500,
+                      fontSize: '0.9rem',
+                      color: '#FFFFFF',
+                      textDecoration: 'none',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '100px',
+                      backgroundColor: currentPath === routePath
+                        ? 'rgba(255, 255, 255, 0.2)' 
+                        : 'transparent',
+                      transition: 'all 0.2s ease',
+                      display: 'block',
+                      opacity: currentPath === routePath ? 1 : 0.8,
+                    }}
+                    onMouseEnter={(e) => {
+                      if (currentPath !== routePath) {
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                        e.target.style.opacity = '1';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (currentPath !== routePath) {
+                        e.target.style.backgroundColor = 'transparent';
+                        e.target.style.opacity = '0.8';
+                      }
+                    }}
+                  >
+                    {route}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </motion.header>
