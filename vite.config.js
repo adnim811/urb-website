@@ -13,9 +13,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-      },
+      input: resolve(__dirname, 'index.html'),
       output: {
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.')
@@ -26,7 +24,8 @@ export default defineConfig({
           return `assets/[name]-[hash][extname]`
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js'
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        manualChunks: undefined
       }
     }
   },
@@ -34,7 +33,16 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src'),
       '@assets': resolve(__dirname, 'src/assets')
-    }
+    },
+    extensions: ['.js', '.jsx', '.json']
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom']
+  },
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.jsx?$/,
+    exclude: []
   }
 })
 
