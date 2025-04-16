@@ -7,5 +7,6 @@ export default defineConfig({
   server: {
     open: true, // 👈 this opens the browser when you run `npm run dev`
   },
+  base: '/Aditya-Portfolio/',
 })
 
