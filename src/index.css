@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans:wght@400;500&display=swap');
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a1a;
+  color: #FFFFFF;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Heading font override - only apply to non-Tailwind elements */
+h1:not([class*="font-"]),
+h2:not([class*="font-"]),
+h3:not([class*="font-"]) {
+  font-family: 'DM Serif Display', serif;
+}
+
+/* Anchor tag styles - only apply to non-Tailwind elements */
+a:not([class*="text-"]) {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+a:not([class*="text-"]):hover {
+  color: #5a0817;
+}
+
+/* Header / Navbar */
+header {
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Navigation links */
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+nav a:not([class*="text-"]) {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+}
+
+nav a:not([class*="text-"]):hover {
+  color: #5a0817;
+}
+
+/* Button styles - only apply to non-Tailwind elements */
+button:not([class*="bg-"]),
+a.button:not([class*="bg-"]) {
+  font-size: 1rem;
+  background-color: #5a0817;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+button:not([class*="bg-"]):hover,
+a.button:not([class*="bg-"]):hover {
+  background-color: #450513;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transform: scale(1.05);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #5a0817;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* PDF Viewer Styles */
+.react-pdf__Document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.react-pdf__Page {
+  max-width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.react-pdf__Page canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Footer Styles */
+footer {
+  width: 100%;
+  padding: 1rem;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+}
