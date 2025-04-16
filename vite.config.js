@@ -7,12 +7,14 @@ export default defineConfig({
   server: {
     open: true, // 👈 this opens the browser when you run `npm run dev`
   },
-  base: '/Aditya-Portfolio/',
+  base: './',
   build: {
     assetsDir: 'assets',
     rollupOptions: {
       output: {
-        assetFileNames: 'assets/[name][extname]'
+        assetFileNames: 'assets/[name][extname]',
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
       }
     }
   }
