@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import worldMapPng from '../assets/world_map_pixel.png';
 import hyderabad1 from '../assets/Hyderabad_1.jpg';
 import hyderabad2 from '../assets/Hyderabad_2.jpg';
@@ -26,6 +27,8 @@ const WorldMap = () => {
   const [pathProgress, setPathProgress] = useState(0);
   const [mapDimensions, setMapDimensions] = useState({ width: 0, height: 0 });
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const location = useLocation();
 
   const pins = [
     {
@@ -112,7 +115,14 @@ const WorldMap = () => {
     }
   };
 
-  // Add useEffect to initialize map dimensions
+  // Create ordered path segments
+  const pathSegments = [
+    { from: pins[0], to: pins[2] }, // Hyderabad to Bay Area
+    { from: pins[2], to: pins[1] }, // Bay Area to Ann Arbor
+    { from: pins[1], to: pins[3] }  // Ann Arbor to Seattle
+  ];
+
+  // Effect to initialize map dimensions and handle resize
   useEffect(() => {
     const updateDimensions = () => {
       const mapImage = document.getElementById('world-map-image');
@@ -124,26 +134,33 @@ const WorldMap = () => {
       }
     };
 
+    // Initial update
     updateDimensions();
+    
+    // Update on resize
     window.addEventListener('resize', updateDimensions);
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
 
-  // Create ordered path segments
-  const pathSegments = [
-    { from: pins[0], to: pins[2] }, // Hyderabad to Bay Area
-    { from: pins[2], to: pins[1] }, // Bay Area to Ann Arbor
-    { from: pins[1], to: pins[3] }  // Ann Arbor to Seattle
-  ];
-
   // Effect to handle path animation sequence
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPathIndex((prev) => (prev + 1) % pathSegments.length);
-    }, 2500); // Total time for each path (animation + visibility)
+    // Reset animation state when component mounts or route changes
+    setIsAnimating(true);
+    setCurrentPathIndex(0);
 
-    return () => clearInterval(interval);
-  }, []);
+    // Start the animation loop
+    const interval = setInterval(() => {
+      if (isAnimating) {
+        setCurrentPathIndex((prev) => (prev + 1) % pathSegments.length);
+      }
+    }, 2500); // Total time for each path
+
+    // Cleanup on unmount or route change
+    return () => {
+      clearInterval(interval);
+      setIsAnimating(false);
+    };
+  }, [location.pathname]); // Restart animation when route changes
 
   return (
     <div style={{ 
@@ -168,6 +185,16 @@ const WorldMap = () => {
             height: 'auto',
             display: 'block',
             objectFit: 'contain'
+          }}
+          onLoad={() => {
+            // Trigger dimension update when image loads
+            const mapImage = document.getElementById('world-map-image');
+            if (mapImage) {
+              setMapDimensions({
+                width: mapImage.offsetWidth,
+                height: mapImage.offsetHeight
+              });
+            }
           }}
         />
 
@@ -207,6 +234,10 @@ const WorldMap = () => {
               exit={{ 
                 opacity: 0,
                 transition: { duration: 0.5, ease: "easeInOut" }
+              }}
+              onAnimationComplete={() => {
+                // Ensure animation continues
+                setIsAnimating(true);
               }}
             />
           </AnimatePresence>

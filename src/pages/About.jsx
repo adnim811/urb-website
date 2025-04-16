@@ -1,7 +1,23 @@
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import WorldMap from '../components/WorldMap';
 
 const About = () => {
+  useEffect(() => {
+    // Force a reflow to ensure animations start properly
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const worldMap = document.querySelector('#world-map-container');
+        if (worldMap) {
+          worldMap.style.opacity = '0';
+          window.requestAnimationFrame(() => {
+            worldMap.style.opacity = '1';
+          });
+        }
+      });
+    });
+  }, []);
+
   return (
     <motion.div 
       className="w-full py-6" 
@@ -35,7 +51,9 @@ const About = () => {
             </span>
           </p>
         </motion.div>
-        <WorldMap />
+        <div id="world-map-container">
+          <WorldMap />
+        </div>
       </motion.div>
     </motion.div>
   );
