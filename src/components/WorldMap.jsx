@@ -4,6 +4,17 @@ import { useLocation } from 'react-router-dom';
 import worldMapPng from '../assets/world_map_pixel.png';
 import hyderabad1 from '../assets/Hyderabad_1.jpg';
 import hyderabad2 from '../assets/Hyderabad_2.jpg';
+import hyderabadAditya from '../assets/Hyderabad_Aditya.jpg';
+import BuddhaPortfolio from '../assets/Buddha_Portfolio.png';
+import bay1 from '../assets/Aditya_Bay1.jpg';
+import bay2 from '../assets/Aditya_Bay2.jpg';
+import bay3 from '../assets/Aditya_Bay3.jpg';
+import bay4 from '../assets/Aditya_Bay4.jpg';
+import aa1 from '../assets/Aditya_AA1.jpg';
+import aa2 from '../assets/Aditya_AA2.jpg';
+import aa3 from '../assets/Aditya_AA3.jpg';
+import aa4 from '../assets/Aditya_AA4.jpg';
+import seattle1 from '../assets/Aditya_Seattle1.jpg';
 import { FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 // Utility function to calculate the great circle path between two points
@@ -33,16 +44,24 @@ const WorldMap = () => {
   const pins = [
     {
       id: 1,
-      name: "Hyderabad, India",
+      name: "India",
       coordinates: { x: 67.5, y: 52 },
       images: [
         {
           src: hyderabad1,
-          description: "Born and raised in Hyderabad, India, my journey began in this vibrant city of rich cultural heritage. Growing up here instilled in me a deep connection to my roots and traditions, while the city's rapid transformation into a tech hub sparked my fascination with urban development and the intersection of tradition and modernity."
+          description: "Born in Hyderabad, India, I grew up deeply connected to my roots while witnessing the city's rapid transformation into a tech hub—sparking my fascination with urban development and the blend of tradition and modernity."
+        },
+        {
+          src: hyderabadAditya,
+          description: "Playing street cricket with my childhood friends is one of my favorite memories. Every match felt like a World Cup final, and we'd play until our moms called us home. Those evenings taught me more about friendship, joy, and passion than any classroom ever could."
         },
         {
           src: hyderabad2,
-          description: "The first few years of my life were shaped by being around nature. I love animals and am vegetarian."
+          description: "I've always been drawn to nature—an animal lover and lifelong vegetarian. Living in India briefly, I was surrounded by its raw, vibrant beauty, which deepened my respect for all living beings. If money didn't matter, I'd spend my life caring for animals, creating spaces where they feel safe, loved, and free."
+        },
+        {
+          src: BuddhaPortfolio,
+          description: "My journey is rooted in spiritual exploration. Siddhartha shaped my path, and a Bodhi Tree leaf I keep with me at all times from Bodhgaya reminds me of presence and connection. Meditation taught me we're all linked by invisible energy—grounding my belief that true innovation flows from aligning with nature's rhythms."
         }
       ],
       year: "2004 - 2010"
@@ -53,12 +72,20 @@ const WorldMap = () => {
       coordinates: { x: 25, y: 35 },
       images: [
         {
-          src: hyderabad1,
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          src: aa1,
+          description: "I moved to Ann Arbor to pursue a B.S. in Urban Technology at the University of Michigan, where I've been active in campus life - Founding President @ URB Consulting, serving as VP Internal @ Product Motion, joining IASA, and playing pickup basketball."
         },
         {
-          src: hyderabad1,
-          description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          src: aa2,
+          description: "My experience at Michigan has been incredibly positive—from football games and tailgates to late-night study sessions, the work-hard, play-hard culture and the amazing people I've met have made it unforgettable. I've built lifelong friendships and memories here."
+        },
+        {
+          src: aa3,
+          description: "College hasn't just been about campus—I've made unforgettable memories traveling to places like Chicago, NYC, and Cincinnati with friends. These years have been filled with moments I know I'll one day look back on with nostalgia, grateful for the experiences that shaped me."
+        },
+        {
+          src: aa4,
+          description: "Tapping into my entrepreneurial side, I founded the first and only urban tech consulting org on campus, managing an 8-person exec team and scaling it to 50+ members. We hosted professional and social events while creating meaningful opportunities for students to gain work and leadership experience. My goal is to come back in 2035 and URB is still strong."
         }
       ],
       year: "2022 - 2025"
@@ -69,12 +96,20 @@ const WorldMap = () => {
       coordinates: { x: 14, y: 41 },
       images: [
         {
-          src: hyderabad1,
-          description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+          src: bay1,
+          description: "The Bay Area has always felt like home—I grew up in Cupertino, where I first picked up a basketball, learned the values that guide me today, and was immersed in the spirit of innovation at the heart of Silicon Valley. It's where my love for community, curiosity, and technology first took root."
         },
         {
-          src: hyderabad1,
-          description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+          src: bay2,
+          description: "Middle school was all about adventure—exploring quarries, wandering woods, and getting lost without phones. It felt like Stranger Things—curious, a bit reckless, and full of discovery. Those moments taught me the joy of exploring and the value of getting a little lost."
+        },
+        {
+          src: bay3,
+          description: "I grew up in Boy Scouts, spending nine years learning leadership, resilience, and service through hands-on experiences that shaped who I am today. In September 2022, I earned the rank of Eagle Scout—an achievement that reflects my commitment to growth and giving back to my community."
+        },
+        {
+          src: bay4,
+          description: "I moved from Cupertino to Milpitas just before high school, in a fully new environment. Over the years, I grew academically, socially, and spiritually, building friendships, and learning more about myself. Graduation wasn't just the end of school—it was a milestone of personal growth and transformation."
         }
       ],
       year: "2010 - 2022"
@@ -85,12 +120,8 @@ const WorldMap = () => {
       coordinates: { x: 14, y: 34 },
       images: [
         {
-          src: hyderabad1,
-          description: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident."
-        },
-        {
-          src: hyderabad1,
-          description: "Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio."
+          src: seattle1,
+          description: "I'm an incoming Technical Program Manager intern at Microsoft in Seattle, where I'll be joining the Cloud Operations + Innovations (CO+I) team—and I'm incredibly excited to learn and grow in such an inspiring environment."
         }
       ],
       year: "2025"
@@ -384,31 +415,52 @@ const WorldMap = () => {
                     </h2>
 
                     <div style={{ position: 'relative', marginBottom: '2rem' }}>
-                      {pins.find(p => p.id === selectedPin)?.images[currentImageIndex]?.src ? (
-                        <img
-                          src={pins.find(p => p.id === selectedPin)?.images[currentImageIndex]?.src}
-                          alt={`Location ${currentImageIndex + 1}`}
-                          style={{
-                            width: '100%',
-                            height: '400px',
-                            objectFit: 'cover',
-                            borderRadius: '12px',
-                          }}
-                        />
-                      ) : (
-                        <div style={{
-                          width: '100%',
-                          height: '400px',
-                          backgroundColor: '#2A2A2A',
-                          borderRadius: '12px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: '#808080',
-                        }}>
-                          Image placeholder
-                        </div>
-                      )}
+                      <AnimatePresence mode="wait">
+                        {pins.find(p => p.id === selectedPin)?.images[currentImageIndex]?.src ? (
+                          <motion.div
+                            key={currentImageIndex}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            style={{
+                              width: '100%',
+                              height: '400px',
+                            }}
+                          >
+                            <img
+                              src={pins.find(p => p.id === selectedPin)?.images[currentImageIndex]?.src}
+                              alt={`Location ${currentImageIndex + 1}`}
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                borderRadius: '12px',
+                              }}
+                            />
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            key="placeholder"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            style={{
+                              width: '100%',
+                              height: '400px',
+                              backgroundColor: '#2A2A2A',
+                              borderRadius: '12px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: '#808080',
+                            }}
+                          >
+                            Image placeholder
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                       {/* Arrow navigation */}
                       <button
