@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ParticlesBackground from '../components/ParticlesBackground';
 
 function Hero() {
+  const MotionLink = motion(Link);
+
   return (
     <motion.section
       id="hero"
@@ -87,6 +89,7 @@ function Hero() {
               'Entrepreneurship',
               'Built Environment',
               'Community Building',
+              'Urban Technology',
             ]}
             loop={true}
             cursor
@@ -97,8 +100,8 @@ function Hero() {
           />
         </motion.div>
 
-        <motion.a
-          href="/projects"
+        <MotionLink
+          to="/projects"
           whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
           whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
           initial={{ opacity: 0 }}
@@ -108,7 +111,7 @@ function Hero() {
           style={{ marginTop: '3rem' }}
         >
           View My Work →
-        </motion.a>
+        </MotionLink>
       </main>
     </motion.section>
   );

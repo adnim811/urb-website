@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import { FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiGooglecalendar } from 'react-icons/si';
 import asciiArt from '../assets/ascii-art.png';
-import thoughtBubble1 from '../assets/Thought_Bubble 1.png';
-import thoughtBubble2 from '../assets/Thought_Bubble 2.png';
 
 function Contact() {
   return (
@@ -54,7 +52,7 @@ function Contact() {
               duration: 2.2,
               delay: 0.2,
               ease: "easeInOut",
-              times: [0, 0.8, 1] // Controls the timing of each keyframe
+              times: [0, 0.8, 1]
             }
           }}
           style={{
@@ -65,75 +63,74 @@ function Contact() {
         />
       </motion.div>
 
-      {/* Thought Bubble 1 */}
-      <motion.img
-        src={thoughtBubble1}
-        alt="Thought Bubble 1"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ 
-          duration: 0.4,
-          delay: 2.5, // Adjusted delay to account for slower ASCII art
-          ease: "easeOut"
-        }}
-        style={{
-          position: 'absolute',
-          bottom: '300px',
-          left: '400px',
-          width: '200px',
-          height: 'auto',
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-
-      {/* Thought Bubble 2 */}
-      <motion.img
-        src={thoughtBubble2}
-        alt="Thought Bubble 2"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ 
-          duration: 0.4,
-          delay: 2.7, // Adjusted delay to account for slower ASCII art
-          ease: "easeOut"
-        }}
-        style={{
-          position: 'absolute',
-          bottom: '300px',
-          left: '600px',
-          width: '750px',
-          height: 'auto',
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-
-      {/* Main content wrapper with delayed fade in */}
+      {/* Main content wrapper with thought bubble effect */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ 
           duration: 0.6,
-          delay: 3.0, // Adjusted delay to account for slower ASCII art
+          delay: 3.0,
           ease: "easeOut"
         }}
         style={{
           marginTop: '15vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
+          position: 'relative',
+          padding: '4rem 6rem',
+          border: '3px solid black',
+          borderRadius: '70% 70% 70% 70% / 60% 60% 60% 60%',
+          background: 'white',
         }}
       >
+        {/* Thought bubbles */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 2.5 }}
+          style={{
+            position: 'absolute',
+            left: '-100px',
+            bottom: '40px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            gap: '8px',
+            transform: 'rotate(-65deg)',
+          }}
+        >
+          <div style={{
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            border: '3px solid black',
+            background: 'white',
+          }} />
+          <div style={{
+            width: '30px',
+            height: '30px',
+            borderRadius: '50%',
+            border: '3px solid black',
+            background: 'white',
+            marginLeft: '35px',
+          }} />
+          <div style={{
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            border: '3px solid black',
+            background: 'white',
+            marginLeft: '70px',
+          }} />
+        </motion.div>
+
         <h2
           style={{
             fontFamily: "'DM Serif Display', serif",
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             marginBottom: '1.5rem',
+            textAlign: 'center',
           }}
         >
-          Let's connect
+          Let's Connect!
         </h2>
 
         <p
@@ -142,9 +139,10 @@ function Contact() {
             lineHeight: 1.7,
             maxWidth: '600px',
             marginBottom: '2.5rem',
+            textAlign: 'center',
           }}
         >
-          I love hearing from other creatives, builders, and curious minds. Whether you want to chat product, share an idea, or just say hi — I'm all ears.
+          I love meeting people from all walks of life. Whether you want to chat business, share an idea, need advice, or simply make an introduction — My inbox is always open!
         </p>
 
         <div
@@ -179,8 +177,10 @@ function Contact() {
             style={iconWrapper}
           >
             <FaEnvelope size={38} color="#000000" />
-            <span style={iconText}>Email Me <br />
-            adnim@umich.edu<br /> </span>
+            <div style={{...iconText, textAlign: 'center'}}>
+              <span>Email Me</span>
+              <span style={{ display: 'block', fontSize: '0.9rem', opacity: 0.8 }}>adnim@umich.edu</span>
+            </div>
           </motion.a>
 
           {/* Google Calendar */}
@@ -194,7 +194,7 @@ function Contact() {
             style={iconWrapper}
           >
             <SiGooglecalendar size={40} color="#4285F4" />
-            <span style={iconText}>Let's Chat</span>
+            <span style={iconText}>Book a Meeting</span>
           </motion.a>
         </div>
       </motion.div>
