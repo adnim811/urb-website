@@ -92,7 +92,7 @@
   margin-bottom: 1.75rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  color: #5a0817;
+  color: #dc2626;
   letter-spacing: 0.01em;
   text-transform: lowercase;
   position: relative;
@@ -106,7 +106,7 @@
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #5a0817;
+  background-color: #dc2626;
 }
 
 @media (min-width: 640px) {
@@ -128,7 +128,7 @@
   padding-left: 2rem;
   padding-bottom: 3.5rem;
   margin-bottom: 2rem;
-  border-left: 2px solid rgba(90, 8, 23, 0.3);
+  border-left: 2px solid rgba(220, 38, 38, 0.3);
   transition: border-color 0.3s ease;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .experience-item:hover {
-  border-color: #5a0817;
+  border-color: #dc2626;
 }
 
 .experience-dot {
@@ -156,16 +156,16 @@
   width: 1rem;
   height: 1rem;
   margin-left: -0.5rem;
-  background-color: rgba(90, 8, 23, 0.5);
+  background-color: rgba(220, 38, 38, 0.5);
   border-radius: 9999px;
   transition: all 0.3s ease;
   border: 2px solid transparent;
 }
 
 .experience-item:hover .experience-dot {
-  background-color: #5a0817;
+  background-color: #dc2626;
   transform: scale(1.2);
-  box-shadow: 0 0 10px rgba(90, 8, 23, 0.5);
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
 }
 
 /* Company logo styles */
@@ -256,7 +256,8 @@
   height: 24px !important;
 }
 
-.skills-container {
+/* Remove conflicting skills styles */
+/* .skills-container {
   position: relative;
   padding: 0 1rem;
 }
@@ -336,7 +337,7 @@
 
 .skill-dot:not(.active):hover {
   background-color: rgba(90, 8, 23, 0.4);
-}
+} */
 
 .resume-bottom-fade {
   position: fixed;
@@ -355,7 +356,7 @@
   align-items: center !important;
   justify-content: center !important;
   padding: 0.625rem 1.25rem !important;
-  background: rgba(90, 8, 23, 0.9) !important;
+  background: rgba(220, 38, 38, 0.9) !important;
   border-radius: 6px !important;
   color: white !important;
   font-weight: 500 !important;
@@ -373,7 +374,7 @@
 }
 
 .view-resume-btn:hover {
-  background: rgba(90, 8, 23, 0.9) !important;
+  background: rgba(220, 38, 38, 0.9) !important;
 }
 
 .view-resume-btn:hover::before {

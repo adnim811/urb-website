@@ -236,17 +236,18 @@ function Navbar() {
             display: 'block',
             opacity: 1,
             boxShadow: '0 0 20px rgba(0, 150, 247, 0.3)',
+            transform: 'translateY(10px)', // Add this line to move the button down by 20px
           }}
           onMouseEnter={(e) => {
             e.target.style.backgroundColor = '#0096f7';
-            e.target.style.transform = 'scale(1.05)';
+            e.target.style.transform = 'translateY(20px) scale(1.05)'; // Combine translateY with scale
             e.target.style.boxShadow = '0 0 25px rgba(0, 150, 247, 0.4)';
           }}
           onMouseLeave={(e) => {
             if (location.pathname !== '/contact') {
               e.target.style.backgroundColor = 'rgba(0, 150, 247, 0.8)';
             }
-            e.target.style.transform = 'scale(1)';
+            e.target.style.transform = 'translateY(20px) scale(1)'; // Combine translateY with scale
             e.target.style.boxShadow = '0 0 20px rgba(0, 150, 247, 0.3)';
           }}
         >
