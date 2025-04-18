@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import { FiSearch } from 'react-icons/fi';
 import project1Image from '../assets/Aditya_Project1.jpg';
@@ -8,6 +8,50 @@ import project3Image from '../assets/Aditya_Project3.jpg';
 import project4Image from '../assets/Aditya_Project4.jpg';
 import project5Image from '../assets/Aditya_Project5.jpg';
 import project6Image from '../assets/Aditya_Project6.jpg';
+
+const ProjectParticles = () => {
+  const generateParticleProps = () => ({
+    '--x': `${Math.random() * 100}%`,
+    '--y': `${Math.random() * 100}%`,
+    '--duration': `${15 + Math.random() * 15}s`,
+    '--delay': `${-Math.random() * 20}s`,
+    '--size': `${3 + Math.random() * 3}px`,
+  });
+
+  return (
+    <div style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden',
+      zIndex: 0,
+      backgroundColor: '#ffffff'
+    }}>
+      {Array.from({ length: 75 }).map((_, index) => (
+        <div
+          key={index}
+          style={{
+            position: 'absolute',
+            backgroundColor: '#e31837',
+            borderRadius: '50%',
+            opacity: 0.4,
+            width: 'var(--size)',
+            height: 'var(--size)',
+            left: 'var(--x)',
+            top: 'var(--y)',
+            transition: 'opacity 0.3s ease',
+            willChange: 'transform',
+            animation: 'moveParticle var(--duration) ease-in-out infinite',
+            animationDelay: 'var(--delay)',
+            ...generateParticleProps()
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 function Projects() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -54,7 +98,7 @@ function Projects() {
     },
     {
       title: "Charlotte Mixed-Use Development",
-      description: "This project focused on designing a mixed-use, multi-family development in Charlotte's Uptown Central Business District. I collaborated with a cross-disciplinary team to conduct a full market analysis, develop a unit mix strategy, calculate return on investment, and draft a phased construction timeline. We proposed a nine-story complex with ground-floor retail, modern amenities, and sustainable features tailored to young professionals.",
+      description: "This project focused on designing a mixed-use, multi-family development in Charlotte's Uptown Central Business District. I led a cross-disciplinary team to conduct a full market analysis, develop strategy, calculate ROI, and draft a phased construction timeline. We proposed a nine-story complex with ground-floor retail, modern amenities, and sustainable features.",
       technologies: ["Real Estate", "Zoning", "Finance", "Urban Development"],
       category: "Analysis",
       liveLink: "https://docs.google.com/presentation/d/1lwM6aqRlQvnT1pmAz4MIk6NVmQTne-w5pQ667_Xs9uA/edit?usp=sharing",
@@ -64,14 +108,18 @@ function Projects() {
       title: "Space Invaders",
       description: "I led the development of a custom-built Space Invaders game using an Arduino, integrating hardware and software to create a playable retro-style experience. I programmed game logic in C++, designed pixel-based animations for enemy movement and player control, and connected input buttons and LED matrices to simulate gameplay. The project demonstrated my ability to combine embedded systems programming with interactive design, resulting in a fully functional and engaging hardware-based game.",
       technologies: ["C++", "Arduino", "Product Design", "Hardware"],
-      category: "Coding",
+      categories: ["Coding", "Product Management"],
       image: project5Image
     }
   ];
 
   // Filter projects based on category and search query
   const filteredProjects = projects.filter(project => {
-    const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'All' || 
+      (project.categories ? 
+        project.categories.includes(selectedCategory) : 
+        project.category === selectedCategory);
+    
     const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          project.technologies.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -88,11 +136,25 @@ function Projects() {
         backgroundColor: '#ffffff',
         minHeight: '100vh',
         padding: '0 2rem 4rem 2rem',
-        marginTop: '-1.5rem',
+        marginTop: '0',
         fontFamily: "'Open Sans', sans-serif",
         position: 'relative',
       }}
     >
+      <style>
+        {`
+          @keyframes moveParticle {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -50px); }
+            50% { transform: translate(200px, 0); }
+            75% { transform: translate(100px, 50px); }
+            100% { transform: translate(0, 0); }
+          }
+        `}
+      </style>
+
+      <ProjectParticles />
+
       {/* Top fade overlay */}
       <div style={{
         position: 'sticky',
@@ -105,21 +167,13 @@ function Projects() {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          style={{
-            fontFamily: "'DM Serif Display', serif",
-            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-            marginBottom: '0.75rem',
-            textAlign: 'center'
-          }}
-        >
-          My Projects
-        </motion.h1>
-
+      <div style={{ 
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        position: 'relative', 
+        zIndex: 1,
+        paddingTop: '8rem' 
+      }}>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -217,10 +271,26 @@ function Projects() {
             gap: '2rem',
             alignItems: 'stretch'
           }}
+          layout
         >
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{
+                  opacity: { duration: 0.3 },
+                  scale: { duration: 0.4 },
+                  layout: { duration: 0.4 }
+                }}
+              >
+                <ProjectCard {...project} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
       </div>
 

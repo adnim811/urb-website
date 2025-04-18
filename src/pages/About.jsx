@@ -1,8 +1,11 @@
-import { motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import WorldMap from '../components/WorldMap';
+import SpaceInvaders from '../components/SpaceInvaders';
 
 const About = () => {
+  const [showGame, setShowGame] = useState(false);
+
   useEffect(() => {
     // Force a reflow to ensure animations start properly
     window.requestAnimationFrame(() => {
@@ -47,7 +50,13 @@ const About = () => {
         >
           <p className="text-lg text-white max-w-3xl">
             <span style={{ marginLeft: '6rem' }}>
-              Click on the points to learn about me from my journey across the globe. Each location tells a whole new story.
+              Click on the points to learn about me from my journey across the globe. Each location tells a whole new{' '}
+              <span 
+                onClick={() => setShowGame(true)}
+                style={{ cursor: 'default' }}
+              >
+                story
+              </span>.
             </span>
           </p>
         </motion.div>
@@ -55,6 +64,10 @@ const About = () => {
           <WorldMap />
         </div>
       </motion.div>
+
+      <AnimatePresence>
+        {showGame && <SpaceInvaders onClose={() => setShowGame(false)} />}
+      </AnimatePresence>
     </motion.div>
   );
 };

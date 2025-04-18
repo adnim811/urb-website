@@ -214,7 +214,7 @@ function Navbar() {
         transition={{ duration: 0.6 }}
         style={{
           position: 'fixed',
-          top: '1.75rem',
+          top: '2rem',
           right: '2rem',
           zIndex: 100,
         }}
