@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { FiFigma } from 'react-icons/fi';
+import { FaYoutube } from 'react-icons/fa';
 import hyderabad1 from '../assets/Hyderabad_1.jpg';
 
 const ProjectCard = ({ 
@@ -7,8 +9,10 @@ const ProjectCard = ({
   description = "This is a sample project description that will be replaced with actual content. It showcases the project's key features and goals.", 
   image = hyderabad1,
   technologies = ["React", "Node.js", "MongoDB"],
-  liveLink = "#",
-  githubLink = "#",
+  liveLink,
+  figmaLink,
+  githubLink,
+  youtubeLink,
   category = "Web Development"
 }) => {
   return (
@@ -60,18 +64,22 @@ const ProjectCard = ({
 
       <div style={{ padding: '1.5rem' }}>
         <div style={{ 
-          fontSize: '0.875rem', 
-          color: '#5a0817',
-          marginBottom: '0.5rem',
-          fontWeight: 500
+          fontSize: '0.75rem', 
+          color: '#e31837',
+          marginBottom: '0.25rem',
+          fontWeight: 500,
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em'
         }}>
           {category}
         </div>
         
         <h3 style={{ 
-          fontSize: '1.5rem',
-          marginBottom: '1rem',
-          fontFamily: "'DM Serif Display', serif"
+          fontSize: '1.75rem',
+          marginBottom: '0.75rem',
+          fontFamily: "'DM Serif Display', serif",
+          color: '#1a1a1a',
+          lineHeight: '1.2'
         }}>
           {title}
         </h3>
@@ -95,11 +103,11 @@ const ProjectCard = ({
             <span
               key={index}
               style={{
-                backgroundColor: '#f3f4f6',
+                backgroundColor: '#e31837',
                 padding: '0.25rem 0.75rem',
                 borderRadius: '999px',
                 fontSize: '0.875rem',
-                color: '#5a0817',
+                color: '#ffffff',
               }}
             >
               {tech}
@@ -112,42 +120,86 @@ const ProjectCard = ({
           gap: '1rem',
           justifyContent: 'flex-end'
         }}>
-          <motion.a
-            href={githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              color: '#000',
-              padding: '0.5rem',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'background-color 0.3s ease'
-            }}
-          >
-            <FiGithub size={20} />
-          </motion.a>
-          <motion.a
-            href={liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              color: '#000',
-              padding: '0.5rem',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'background-color 0.3s ease'
-            }}
-          >
-            <FiExternalLink size={20} />
-          </motion.a>
+          {figmaLink && (
+            <motion.a
+              href={figmaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                color: '#000',
+                padding: '0.5rem',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background-color 0.3s ease'
+              }}
+            >
+              <FiFigma size={20} />
+            </motion.a>
+          )}
+          {githubLink && (
+            <motion.a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                color: '#000',
+                padding: '0.5rem',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background-color 0.3s ease'
+              }}
+            >
+              <FiGithub size={20} />
+            </motion.a>
+          )}
+          {youtubeLink && (
+            <motion.a
+              href={youtubeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                color: '#FF0000',
+                padding: '0.5rem',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background-color 0.3s ease'
+              }}
+            >
+              <FaYoutube size={20} />
+            </motion.a>
+          )}
+          {liveLink && liveLink !== "#" && (
+            <motion.a
+              href={liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                color: '#000',
+                padding: '0.5rem',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background-color 0.3s ease'
+              }}
+            >
+              <FiExternalLink size={20} />
+            </motion.a>
+          )}
         </div>
       </div>
     </motion.div>

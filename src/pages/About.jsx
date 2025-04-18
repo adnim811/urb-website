@@ -47,7 +47,7 @@ const About = () => {
         >
           <p className="text-lg text-white max-w-3xl">
             <span style={{ marginLeft: '6rem' }}>
-              Click on the points to explore my journey across the globe. Each location holds a special place in my story.
+              Click on the points to learn about me from my journey across the globe. Each location tells a whole new story.
             </span>
           </p>
         </motion.div>
