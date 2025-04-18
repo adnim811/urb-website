@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import { FiSearch } from 'react-icons/fi';
+import SpaceInvaders from '../components/SpaceInvaders';
 import project1Image from '../assets/Aditya_Project1.jpg';
 import project2Image from '../assets/Aditya_Project2.jpg';
 import project3Image from '../assets/Aditya_Project3.jpg';
@@ -56,6 +57,7 @@ const ProjectParticles = () => {
 function Projects() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showGame, setShowGame] = useState(false);
 
   // Sample categories - replace with your actual categories
   const categories = ['All', 'Product Management', 'Coding', 'Analysis'];
@@ -106,7 +108,14 @@ function Projects() {
     },
     {
       title: "Space Invaders",
-      description: "I led the development of a custom-built Space Invaders game using an Arduino, integrating hardware and software to create a playable retro-style experience. I programmed game logic in C++, designed pixel-based animations for enemy movement and player control, and connected input buttons and LED matrices to simulate gameplay. The project demonstrated my ability to combine embedded systems programming with interactive design, resulting in a fully functional and engaging hardware-based game.",
+      description: <>I led the development of a custom-built{' '}
+        <span 
+          onClick={() => setShowGame(true)}
+          style={{ cursor: 'default' }}
+        >
+          Space Invaders
+        </span>{' '}
+        game using an Arduino, integrating hardware and software to create a playable retro-style experience. I programmed game logic in C++, designed pixel-based animations for enemy movement and player control, and connected input buttons and LED matrices to simulate gameplay. The project demonstrated my ability to combine embedded systems programming with interactive design, resulting in a fully functional and engaging hardware-based game.</>,
       technologies: ["C++", "Arduino", "Product Design", "Hardware"],
       categories: ["Coding", "Product Management"],
       image: project5Image
@@ -306,6 +315,10 @@ function Projects() {
         zIndex: 10,
         opacity: 0.9,
       }} />
+
+      <AnimatePresence>
+        {showGame && <SpaceInvaders onClose={() => setShowGame(false)} />}
+      </AnimatePresence>
     </motion.section>
   );
 }
