@@ -66,7 +66,7 @@ function Projects() {
   const projects = [
     {
       title: "Parcel Data API",
-      description: "For my 2024 internship, I led the development of a property prioritization tool to help the sales team make sense of inbound leads. The tool pulled in real estate footprint, parcel, and zoning data to assess each property's ADU feasibility, then assigned a dynamic score based on factors like lot size, setbacks, and local regulations. I collaborated cross-functionally to design the product roadmap in Jira and worked closely with engineers and designers to build a scalable system that enabled faster decision-making and more targeted outreach.",
+      description: "For my 2024 internship at Abodu, I led the development of a property prioritization tool to help the sales team make sense of inbound leads. The tool pulled in real estate footprint, parcel, and zoning data to assess each property's ADU feasibility, then assigned a dynamic score based on factors like lot size, setbacks, and local regulations. I collaborated cross-functionally to design the product roadmap in Jira and worked closely with engineers and designers to build a scalable system that enabled faster decision-making and more targeted outreach.",
       technologies: ["Product Management", "Figma", "Customer Interviews", "API"],
       category: "Product Management",
       image: project6Image
@@ -118,6 +118,7 @@ function Projects() {
         game using an Arduino, integrating hardware and software to create a playable retro-style experience. I programmed game logic in C++, designed pixel-based animations for enemy movement and player control, and connected input buttons and LED matrices to simulate gameplay. The project demonstrated my ability to combine embedded systems programming with interactive design, resulting in a fully functional and engaging hardware-based game.</>,
       technologies: ["C++", "Arduino", "Product Design", "Hardware"],
       categories: ["Coding", "Product Management"],
+      category: "Coding & Product Management",
       image: project5Image
     }
   ];
@@ -129,9 +130,23 @@ function Projects() {
         project.categories.includes(selectedCategory) : 
         project.category === selectedCategory);
     
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.technologies.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()));
+    // Check the type of description to determine how to search in it
+    let descriptionMatchesSearch = false;
+    
+    if (typeof project.description === 'string') {
+      // If description is a string, search normally
+      descriptionMatchesSearch = project.description.toLowerCase().includes(searchQuery.toLowerCase());
+    } else {
+      // If description is a JSX element, skip searching in it
+      // Alternatively, you could extract text content from JSX if needed
+      descriptionMatchesSearch = false;
+    }
+    
+    const matchesSearch = 
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      descriptionMatchesSearch ||
+      project.technologies.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()));
+    
     return matchesCategory && matchesSearch;
   });
 
