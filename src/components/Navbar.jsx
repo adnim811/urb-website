@@ -1,11 +1,26 @@
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 function Navbar() {
   const location = useLocation();
   const [textColor, setTextColor] = useState('#000000');
   const nameRef = useRef(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Function to calculate relative luminance
   const getLuminance = (r, g, b) => {
@@ -96,7 +111,20 @@ function Navbar() {
     };
   }, []);
 
-  const currentPath = location.hash.slice(2) || ''; // Remove the '#/' and get the current path
+  const currentPath = location.hash.slice(2) || '';
+
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      y: -20,
+      pointerEvents: 'none',
+    },
+    open: {
+      opacity: 1,
+      y: 0,
+      pointerEvents: 'auto',
+    },
+  };
 
   return (
     <>
@@ -116,7 +144,7 @@ function Navbar() {
           to="/"
           style={{
             fontFamily: "'DM Serif Display', serif",
-            fontSize: '1.5rem',
+            fontSize: 'clamp(1.2rem, 4vw, 1.5rem)',
             color: textColor,
             textDecoration: 'none',
             transition: 'color 0.3s ease',
@@ -132,127 +160,266 @@ function Navbar() {
         </Link>
       </motion.div>
 
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        style={{
-          backgroundColor: 'rgba(32, 32, 32, 0.5)',
-          backdropFilter: 'blur(8px)',
-          padding: '0.75rem 2rem',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'fixed',
-          top: '1rem',
-          left: '0',
-          right: '0',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          width: 'fit-content',
-          zIndex: 100,
-          fontFamily: "'Open Sans', sans-serif",
-          borderRadius: '100px',
-        }}
-      >
-        <nav>
-          <ul
+      {isMobile ? (
+        <>
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             style={{
-              display: 'flex',
-              gap: '0.5rem',
-              listStyle: 'none',
-              margin: 0,
-              padding: 0,
+              position: 'fixed',
+              top: '2rem',
+              right: '2rem',
+              zIndex: 101,
+              background: 'none',
+              border: 'none',
+              color: textColor,
+              cursor: 'pointer',
+              padding: '0.5rem',
             }}
           >
-            {['About', 'Projects', 'Resume'].map((route) => {
-              const routePath = route.toLowerCase();
-              return (
-                <li key={route}>
-                  <Link
-                    to={`/${routePath}`}
+            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </motion.button>
+
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={menuVariants}
+                transition={{ duration: 0.3 }}
+                style={{
+                  position: 'fixed',
+                  top: '5rem',
+                  right: '1rem',
+                  backgroundColor: 'rgba(32, 32, 32, 0.95)',
+                  backdropFilter: 'blur(8px)',
+                  padding: '1rem',
+                  borderRadius: '12px',
+                  zIndex: 100,
+                }}
+              >
+                <nav>
+                  <ul
                     style={{
-                      position: 'relative',
-                      fontWeight: 500,
-                      fontSize: '0.9rem',
-                      color: '#FFFFFF',
-                      textDecoration: 'none',
-                      padding: '0.5rem 1rem',
-                      borderRadius: '100px',
-                      backgroundColor: currentPath === routePath
-                        ? 'rgba(255, 255, 255, 0.2)' 
-                        : 'transparent',
-                      transition: 'all 0.2s ease',
-                      display: 'block',
-                      opacity: currentPath === routePath ? 1 : 0.8,
-                    }}
-                    onMouseEnter={(e) => {
-                      if (currentPath !== routePath) {
-                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                        e.target.style.opacity = '1';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (currentPath !== routePath) {
-                        e.target.style.backgroundColor = 'transparent';
-                        e.target.style.opacity = '0.8';
-                      }
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.5rem',
+                      listStyle: 'none',
+                      margin: 0,
+                      padding: 0,
                     }}
                   >
-                    {route}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </motion.header>
+                    {['About', 'Projects', 'Resume'].map((route) => {
+                      const routePath = route.toLowerCase();
+                      return (
+                        <li key={route}>
+                          <Link
+                            to={`/${routePath}`}
+                            onClick={() => setIsMenuOpen(false)}
+                            style={{
+                              position: 'relative',
+                              fontWeight: 500,
+                              fontSize: '0.9rem',
+                              color: '#FFFFFF',
+                              textDecoration: 'none',
+                              padding: '0.75rem 1.5rem',
+                              borderRadius: '8px',
+                              backgroundColor: currentPath === routePath
+                                ? 'rgba(255, 255, 255, 0.2)'
+                                : 'transparent',
+                              transition: 'all 0.2s ease',
+                              display: 'block',
+                              opacity: currentPath === routePath ? 1 : 0.8,
+                              width: '100%',
+                              textAlign: 'center',
+                            }}
+                            onMouseEnter={(e) => {
+                              if (currentPath !== routePath) {
+                                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                                e.target.style.opacity = '1';
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if (currentPath !== routePath) {
+                                e.target.style.backgroundColor = 'transparent';
+                                e.target.style.opacity = '0.8';
+                              }
+                            }}
+                          >
+                            {route}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                    <li>
+                      <Link
+                        to="/contact"
+                        onClick={() => setIsMenuOpen(false)}
+                        style={{
+                          position: 'relative',
+                          fontWeight: 500,
+                          fontSize: '0.9rem',
+                          color: '#FFFFFF',
+                          textDecoration: 'none',
+                          padding: '0.75rem 1.5rem',
+                          borderRadius: '8px',
+                          backgroundColor: location.pathname === '/contact'
+                            ? '#0096f7'
+                            : 'rgba(0, 150, 247, 0.8)',
+                          transition: 'all 0.3s ease',
+                          display: 'block',
+                          opacity: 1,
+                          width: '100%',
+                          textAlign: 'center',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = '#0096f7';
+                          e.target.style.transform = 'scale(1.05)';
+                        }}
+                        onMouseLeave={(e) => {
+                          if (location.pathname !== '/contact') {
+                            e.target.style.backgroundColor = 'rgba(0, 150, 247, 0.8)';
+                          }
+                          e.target.style.transform = 'scale(1)';
+                        }}
+                      >
+                        Contact
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      ) : (
+        <>
+          <motion.header
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            style={{
+              backgroundColor: 'rgba(32, 32, 32, 0.5)',
+              backdropFilter: 'blur(8px)',
+              padding: '0.75rem 2rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'fixed',
+              top: '1rem',
+              left: '0',
+              right: '0',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: 'fit-content',
+              zIndex: 100,
+              fontFamily: "'Open Sans', sans-serif",
+              borderRadius: '100px',
+            }}
+          >
+            <nav>
+              <ul
+                style={{
+                  display: 'flex',
+                  gap: '0.5rem',
+                  listStyle: 'none',
+                  margin: 0,
+                  padding: 0,
+                }}
+              >
+                {['About', 'Projects', 'Resume'].map((route) => {
+                  const routePath = route.toLowerCase();
+                  return (
+                    <li key={route}>
+                      <Link
+                        to={`/${routePath}`}
+                        style={{
+                          position: 'relative',
+                          fontWeight: 500,
+                          fontSize: '0.9rem',
+                          color: '#FFFFFF',
+                          textDecoration: 'none',
+                          padding: '0.5rem 1rem',
+                          borderRadius: '100px',
+                          backgroundColor: currentPath === routePath
+                            ? 'rgba(255, 255, 255, 0.2)'
+                            : 'transparent',
+                          transition: 'all 0.2s ease',
+                          display: 'block',
+                          opacity: currentPath === routePath ? 1 : 0.8,
+                        }}
+                        onMouseEnter={(e) => {
+                          if (currentPath !== routePath) {
+                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                            e.target.style.opacity = '1';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (currentPath !== routePath) {
+                            e.target.style.backgroundColor = 'transparent';
+                            e.target.style.opacity = '0.8';
+                          }
+                        }}
+                      >
+                        {route}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </motion.header>
 
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        style={{
-          position: 'fixed',
-          top: '2rem',
-          right: '2rem',
-          zIndex: 100,
-        }}
-      >
-        <Link
-          to="/contact"
-          style={{
-            position: 'relative',
-            fontWeight: 500,
-            fontSize: '0.9rem',
-            color: '#FFFFFF',
-            textDecoration: 'none',
-            padding: '0.6rem 1.25rem',
-            borderRadius: '100px',
-            backgroundColor: location.pathname === '/contact'
-              ? '#0096f7'
-              : 'rgba(0, 150, 247, 0.8)',
-            transition: 'all 0.3s ease',
-            display: 'block',
-            opacity: 1,
-            boxShadow: '0 0 20px rgba(0, 150, 247, 0.3)',
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#0096f7';
-            e.target.style.transform = 'scale(1.05)';
-            e.target.style.boxShadow = '0 0 25px rgba(0, 150, 247, 0.4)';
-          }}
-          onMouseLeave={(e) => {
-            if (location.pathname !== '/contact') {
-              e.target.style.backgroundColor = 'rgba(0, 150, 247, 0.8)';
-            }
-            e.target.style.transform = 'scale(1)';
-            e.target.style.boxShadow = '0 0 20px rgba(0, 150, 247, 0.3)';
-          }}
-        >
-          Contact
-        </Link>
-      </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            style={{
+              position: 'fixed',
+              top: '2rem',
+              right: '2rem',
+              zIndex: 100,
+            }}
+          >
+            <Link
+              to="/contact"
+              style={{
+                position: 'relative',
+                fontWeight: 500,
+                fontSize: '0.9rem',
+                color: '#FFFFFF',
+                textDecoration: 'none',
+                padding: '0.6rem 1.25rem',
+                borderRadius: '100px',
+                backgroundColor: location.pathname === '/contact'
+                  ? '#0096f7'
+                  : 'rgba(0, 150, 247, 0.8)',
+                transition: 'all 0.3s ease',
+                display: 'block',
+                opacity: 1,
+                boxShadow: '0 0 20px rgba(0, 150, 247, 0.3)',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#0096f7';
+                e.target.style.transform = 'scale(1.05)';
+                e.target.style.boxShadow = '0 0 25px rgba(0, 150, 247, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                if (location.pathname !== '/contact') {
+                  e.target.style.backgroundColor = 'rgba(0, 150, 247, 0.8)';
+                }
+                e.target.style.transform = 'scale(1)';
+                e.target.style.boxShadow = '0 0 20px rgba(0, 150, 247, 0.3)';
+              }}
+            >
+              Contact
+            </Link>
+          </motion.div>
+        </>
+      )}
     </>
   );
 }

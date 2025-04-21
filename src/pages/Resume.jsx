@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
-import { FaBriefcase, FaGraduationCap, FaLaptopCode, FaUserAlt, FaFileAlt, FaTools } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaLaptopCode, FaUserAlt, FaTools } from 'react-icons/fa';
 import Skills from '../components/Skills';
 import '../styles/Resume.css';
 
@@ -11,8 +11,6 @@ import BluegreenLogo from '../assets/Bluegreen_Logo_Transparent.png';
 import MicrosoftLogo from '../assets/microsoft_logo_transparent.png';
 import URBLogo from '../assets/URB_Logo_NoBackground.png';
 import UMichLogo from '../assets/UMichM_Logo_Transparent.png';
-// Import resume PDF
-import ResumePDF from '../assets/Aditya_Resume_Portfolio.pdf';
 
 // Component for company logo
 const CompanyLogo = ({ logo, alt, size = "medium", className = "" }) => {
@@ -45,27 +43,6 @@ const CompanyLogo = ({ logo, alt, size = "medium", className = "" }) => {
         className="object-contain w-full h-full" 
       />
     </motion.div>
-  );
-};
-
-// View Resume Button
-const ViewResumeButton = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <motion.a
-      href={ResumePDF}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="view-resume-btn"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <FaFileAlt className={`view-icon ${isHovered ? 'animate-pulse' : ''}`} />
-      <span>View Paper Resume</span>
-    </motion.a>
   );
 };
 
@@ -170,18 +147,6 @@ const Resume = () => {
           animate="visible"
         >
           
-
-          <motion.div 
-            variants={itemVariants}
-            style={{ 
-              position: 'absolute',
-              right: '550px',
-              top: '260px',
-              zIndex: 50
-            }}
-          >
-            <ViewResumeButton />
-          </motion.div>
 
           <motion.div variants={itemVariants} className="resume-section-content">
             <h2 className="section-title">/objective</h2>

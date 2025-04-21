@@ -27,7 +27,7 @@ function Hero() {
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          padding: '3rem 2rem',
+          padding: 'clamp(1rem, 5vw, 3rem) clamp(1rem, 3vw, 2rem)',
           fontFamily: "'Open Sans', sans-serif",
           position: 'relative',
           zIndex: 1
@@ -47,12 +47,12 @@ function Hero() {
             whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
             transition={{ duration: 0.6 }}
             style={{
-              width: '180px',
-              height: '180px',
+              width: 'clamp(120px, 25vw, 180px)',
+              height: 'clamp(120px, 25vw, 180px)',
               borderRadius: '50%',
               objectFit: 'cover',
               objectPosition: 'center 25%',
-              marginBottom: '1.5rem',
+              marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
               cursor: 'pointer',
             }}

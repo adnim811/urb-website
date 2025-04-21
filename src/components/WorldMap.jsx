@@ -358,7 +358,7 @@ const WorldMap = () => {
                 exit={{ opacity: 0, scale: 0.8 }}
                 style={{
                   position: 'fixed',
-                  top: '100px',
+                  top: '40px',
                   right: '80px',
                   backgroundColor: '#1A1A1A',
                   color: 'white',
@@ -366,11 +366,18 @@ const WorldMap = () => {
                   borderRadius: '16px',
                   boxShadow: '0 4px 30px rgba(0,0,0,0.4)',
                   width: '550px',
-                  height: '750px',
+                  maxHeight: 'calc(100vh - 80px)',
                   overflowY: 'auto',
+                  overflowX: 'hidden',
                   zIndex: 9999,
                   margin: 0,
+                  msOverflowStyle: 'none',
+                  scrollbarWidth: 'none',
+                  '&::-webkit-scrollbar': {
+                    display: 'none'
+                  }
                 }}
+                onClick={(e) => e.stopPropagation()}
               >
                 <button
                   onClick={() => setSelectedPin(null)}
@@ -425,7 +432,7 @@ const WorldMap = () => {
                             transition={{ duration: 0.3 }}
                             style={{
                               width: '100%',
-                              height: '400px',
+                              height: '300px',
                             }}
                           >
                             <img
@@ -448,7 +455,7 @@ const WorldMap = () => {
                             transition={{ duration: 0.3 }}
                             style={{
                               width: '100%',
-                              height: '400px',
+                              height: '300px',
                               backgroundColor: '#2A2A2A',
                               borderRadius: '12px',
                               display: 'flex',
@@ -542,6 +549,7 @@ const WorldMap = () => {
                       fontSize: '1.1rem', 
                       lineHeight: '1.6',
                       color: '#E0E0E0',
+                      marginTop: '1rem',
                     }}>
                       {pins.find(p => p.id === selectedPin)?.images[currentImageIndex]?.description}
                     </p>
