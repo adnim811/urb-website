@@ -1,0 +1,63 @@
+.white-particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  background-color: transparent; /* Transparent background */
+}
+
+.white-particle {
+  position: absolute;
+  background-color: #ffffff; /* White color */
+  border-radius: 50%;
+  opacity: 0.15; /* Lower opacity for subtle effect on dark background */
+  width: var(--size);
+  height: var(--size);
+  left: var(--x);
+  top: var(--y);
+  transition: opacity 0.3s ease;
+  will-change: transform;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Subtle glow effect */
+  pointer-events: none;
+}
+
+.white-particle:hover {
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+@keyframes moveWhiteParticle {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(100px, -50px);
+  }
+  50% {
+    transform: translate(200px, 0);
+  }
+  75% {
+    transform: translate(100px, 50px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.white-particle {
+  animation: moveWhiteParticle var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+} 

@@ -47,7 +47,8 @@ const Skills = () => {
       backgroundColor: '#050505',
       position: 'relative',
       overflow: 'hidden',
-      padding: '0 2rem 3rem 2rem'  // Format: top right bottom left
+      padding: '0 2rem 3rem 2rem',  // Format: top right bottom left
+      zIndex: 5  // Add z-index to ensure skills are above particles
     }}>
       <div style={{ 
         maxWidth: '1400px', 
@@ -70,7 +71,9 @@ const Skills = () => {
               fontWeight: '500',
               border: '1px solid rgba(255,255,255,0.1)',
               cursor: 'default',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              position: 'relative',
+              zIndex: 5
             }}
           >
             {skill}
