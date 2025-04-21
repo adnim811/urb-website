@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 import { FaBriefcase, FaGraduationCap, FaLaptopCode, FaUserAlt, FaTools } from 'react-icons/fa';
 import Skills from '../components/Skills';
+import WhiteParticlesBackground from '../components/WhiteParticlesBackground';
 import '../styles/Resume.css';
 
 // Import company logos
@@ -138,6 +139,7 @@ const Resume = () => {
       transition={{ duration: 0.5 }}
       className="resume-section"
     >
+      <WhiteParticlesBackground />
       <div className="resume-fade-overlay" />
       <div className="resume-content">
         <motion.div 
