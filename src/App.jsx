@@ -1,40 +1,19 @@
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import Navbar from './components/Navbar';
-
-import Hero from './pages/Hero';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Resume from './pages/Resume';
-import Contact from './pages/Contact';
-
-function AnimatedRoutes() {
-  const location = useLocation();
-
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Hero />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </AnimatePresence>
-  );
-}
+import './App.css'
 
 function App() {
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <div className="flex-grow">
-          <AnimatedRoutes />
-        </div>
-      </div>
-    </Router>
-  );
+    <div className="app">
+      <header className="app-header">
+        <h1>Welcome to My Website</h1>
+      </header>
+      <main className="app-main">
+        <p>This is a simple landing page created with React and Vite.</p>
+      </main>
+      <footer className="app-footer">
+        <p>&copy; 2024 My Website</p>
+      </footer>
+    </div>
+  )
 }
 
-export default App;
+export default App
