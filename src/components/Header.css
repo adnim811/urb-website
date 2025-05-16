@@ -8,6 +8,13 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.site-header.scrolled {
+  background-color: rgba(16, 16, 16, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -27,6 +34,11 @@
   height: 80px;
   width: auto;
   object-fit: contain;
+  transition: height 0.3s ease;
+}
+
+.site-header.scrolled .logo img {
+  height: 60px;
 }
 
 .site-nav ul {
@@ -79,6 +91,10 @@
   
   .logo img {
     height: 60px;
+  }
+  
+  .site-header.scrolled .logo img {
+    height: 50px;
   }
   
   .site-nav ul {

@@ -5,10 +5,10 @@ function Students() {
   return (
     <div className="page students-page">
       <main className="app-main">
-        <h1>For Students</h1>
-        <p className="lead">Gain real-world experience while building your portfolio</p>
+        <h1 className="fade-on-scroll">For Students</h1>
+        <p className="lead fade-on-scroll">Gain real-world experience while building your portfolio</p>
         
-        <section className="card">
+        <section className="card fade-on-scroll">
           <h2>Why Join URB?</h2>
           <ul>
             <li>Work on real projects for actual clients</li>
@@ -19,7 +19,7 @@ function Students() {
           </ul>
         </section>
         
-        <section className="card">
+        <section className="card fade-on-scroll">
           <h2>How It Works</h2>
           <p>
             As a student developer at URB, you'll be matched with projects that 

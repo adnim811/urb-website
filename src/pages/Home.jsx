@@ -5,7 +5,7 @@ function Home() {
   return (
     <div className="page home-page">
       <main className="app-main">
-        <section className="hero">
+        <section className="hero fade-on-scroll">
           <div className="hero-content">
             <h1>Welcome to URB Consulting</h1>
             <p className="lead">Bridging the gap between student developers and real-world projects.</p>
@@ -17,7 +17,7 @@ function Home() {
           </div>
         </section>
         
-        <section className="mission-section">
+        <section className="mission-section fade-on-scroll">
           <div className="card">
             <h2>Our Mission</h2>
             <p>
@@ -30,15 +30,15 @@ function Home() {
         
         <section className="features-section">
           <div className="feature-grid">
-            <div className="feature-card">
+            <div className="feature-card fade-on-scroll">
               <h3>Student Development</h3>
               <p>We help students gain real-world experience and build their portfolios through practical projects.</p>
             </div>
-            <div className="feature-card">
+            <div className="feature-card fade-on-scroll">
               <h3>Client Solutions</h3>
               <p>Businesses receive quality technical solutions at competitive rates while supporting student growth.</p>
             </div>
-            <div className="feature-card">
+            <div className="feature-card fade-on-scroll">
               <h3>Mentorship</h3>
               <p>Our experienced mentors guide student teams throughout each project, ensuring professional outcomes.</p>
             </div>

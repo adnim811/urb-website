@@ -5,10 +5,10 @@ function Clients() {
   return (
     <div className="page clients-page">
       <main className="app-main">
-        <h1>For Clients</h1>
-        <p className="lead">Quality solutions delivered by motivated student developers</p>
+        <h1 className="fade-on-scroll">For Clients</h1>
+        <p className="lead fade-on-scroll">Quality solutions delivered by motivated student developers</p>
         
-        <section className="card">
+        <section className="card fade-on-scroll">
           <h2>Our Services</h2>
           <ul>
             <li>Web Development</li>
@@ -19,7 +19,7 @@ function Clients() {
           </ul>
         </section>
         
-        <section className="card">
+        <section className="card fade-on-scroll">
           <h2>Why Choose URB?</h2>
           <p>
             By partnering with URB, you get access to a pool of talented and 

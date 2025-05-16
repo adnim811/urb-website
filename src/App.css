@@ -18,6 +18,11 @@ body {
   min-height: 100vh;
 }
 
+.content-wrapper {
+  flex: 1;
+  position: relative;
+}
+
 .page {
   flex: 1;
   display: flex;
@@ -165,6 +170,11 @@ p {
 /* Page specific styles */
 .home-page, .students-page, .clients-page, .contact-page {
   padding: 2rem 0;
+}
+
+/* Fade animation effect */
+.fade-on-scroll {
+  transition: opacity 0.3s ease;
 }
 
 /* Hero section */

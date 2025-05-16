@@ -33,10 +33,10 @@ function Contact() {
   return (
     <div className="page contact-page">
       <main className="app-main">
-        <h1>Contact Us</h1>
-        <p className="lead">We'd love to hear from you! Fill out the form below to get in touch.</p>
+        <h1 className="fade-on-scroll">Contact Us</h1>
+        <p className="lead fade-on-scroll">We'd love to hear from you! Fill out the form below to get in touch.</p>
         
-        <section className="card">
+        <section className="card fade-on-scroll">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
@@ -92,7 +92,7 @@ function Contact() {
           </form>
         </section>
         
-        <section className="card">
+        <section className="card fade-on-scroll">
           <h2>Other Ways to Reach Us</h2>
           <p>
             <strong>Email:</strong> info@urbconsulting.com<br />
