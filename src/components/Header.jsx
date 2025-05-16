@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Header.css';
-import logoPath from '../assets/react.svg'; // Temporary placeholder until actual logo is available
+import logoPath from '../assets/URB_Logo_NoBackground.png';
 
 function Header() {
   return (
@@ -8,7 +8,6 @@ function Header() {
       <div className="logo">
         <Link to="/">
           <img src={logoPath} alt="URB Consulting Logo" />
-          <span>URB</span>
         </Link>
       </div>
       <nav className="site-nav">
