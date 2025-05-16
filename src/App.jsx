@@ -1,19 +1,30 @@
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Students from './pages/Students';
+import Clients from './pages/Clients';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>Welcome to My Website</h1>
-      </header>
-      <main className="app-main">
-        <p>This is a simple landing page created with React and Vite.</p>
-      </main>
-      <footer className="app-footer">
-        <p>&copy; 2024 My Website</p>
-      </footer>
-    </div>
-  )
+    <Router>
+      <div className="app">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <footer className="app-footer">
+          <p>&copy; {new Date().getFullYear()} URB Consulting</p>
+        </footer>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
