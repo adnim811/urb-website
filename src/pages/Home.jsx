@@ -7,8 +7,8 @@ function Home() {
       <main className="app-main">
         <section className="hero fade-on-scroll">
           <div className="hero-content">
-            <h1>Welcome to URB Consulting</h1>
-            <p className="lead">Bridging the gap between student developers and real-world projects.</p>
+            <h1>Connecting Students with Real-World Projects</h1>
+            <p className="lead">URB Consulting bridges the gap between student developers and businesses seeking innovative solutions.</p>
             
             <div className="cta-buttons">
               <Link to="/students" className="btn btn-primary">I'm a Student</Link>
